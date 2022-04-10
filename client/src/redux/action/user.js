@@ -21,15 +21,12 @@ export function setLoading(payload) {
   };
 }
 
-export function asyncGetUser({ page }) {
+export function asyncGetUser(page) {
   if (!page) page = 1;
   return (dispatch) => {
     reqres
-      .get("user?page=" + page + "&per_page=8")
-      .then(
-        (resp) => dispatch(setUser(resp.data)),
-        dispatch(setTotalPage(resp.total_pages))
-      )
+      .get("users?page=" + page + "&per_page=8")
+      .then((resp) => dispatch(setUser(resp.data)))
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   };

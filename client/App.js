@@ -1,27 +1,31 @@
-import { StatusBar } from "expo-status-bar";
-import React, { Component } from 'react';
-import { StyleSheet, Text, View } from "react-native";
+import React, { Component } from "react";
 import { Provider } from "react-redux";
 import { store } from "./src/redux/index";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default class App extends Component{
+import Login from "./src/screen/Login";
+import Home from "./src/screen/Home"
+import User from "./src/screen/User"
+
+const Stack = createNativeStackNavigator();
+
+export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <Text>Open up App.js to start working on your app!</Text>
-          <StatusBar style="auto" />
-        </View>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={{ headerTitleAlign: "center" }}>
+            <Stack.Screen
+              options={{ headerShown: false }}
+              name="Login"
+              component={Login}
+            />
+            <Stack.Screen name="Home" component={Home}/>
+            <Stack.Screen name="User" component={User}/>
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
