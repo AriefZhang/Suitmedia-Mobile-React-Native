@@ -3,6 +3,7 @@ const userState = {
   user: {},
   total_pages: 0,
   isLoading: true,
+  userList: true
 };
 
 export default function reducer(state = userState, action) {
@@ -21,9 +22,18 @@ export default function reducer(state = userState, action) {
     case "loading/user":
       return {
         ...state,
-        isLoading: true
+        isLoading: payload
       }  
-    
+    case "page/user":
+      return {
+        ...state,
+        userList: payload
+      }  
+    case "total_page/user":
+      return {
+        ...state,
+        userList: payload
+      }  
     default:
       return state
   }
